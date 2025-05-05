@@ -1,82 +1,145 @@
 // =======================
-// Generic Egg Timer Setup with Progress Bar and "Done" GIF
+// Egg Timer Function (Generic)
 // =======================
-function startEggTimer(timerId, totalTime, progressBarId, gifElementId, textElementId, restartButtonId, homeButtonId) {
+function startEggTimer(config) {
+    const {
+      timerId,
+      totalTime,
+      progressBarId,
+      gifElementId,
+      textElementId,
+      restartButtonId,
+      homeButtonId,
+    } = config;
+  
     const countdownElement = document.getElementById(timerId);
     const progressBar = document.getElementById(progressBarId);
     const gifElement = document.getElementById(gifElementId);
     const textElement = document.getElementById(textElementId);
     const restartButton = document.getElementById(restartButtonId);
     const homeButton = document.getElementById(homeButtonId);
-
-    if (!countdownElement || !progressBar || !gifElement || !textElement || !restartButton || !homeButton) return;
-
+    const modal = document.getElementById("home-confirmation-modal");
+    const confirmButton = document.getElementById("confirm-home-button");
+    const cancelButton = document.getElementById("cancel-home-button");
+  
+    // Exit if required elements are missing
+    if (
+      !countdownElement ||
+      !progressBar ||
+      !gifElement ||
+      !textElement ||
+      !restartButton ||
+      !homeButton ||
+      !modal ||
+      !confirmButton ||
+      !cancelButton
+    ) {
+      return;
+    }
+  
     let timeLeft = totalTime;
     let timer;
-
+  
+    // =======================
+    // Timer Logic
+    // =======================
     function updateTimer() {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        const formattedTime = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-
-        countdownElement.textContent = formattedTime;
-
-        const progress = (totalTime - timeLeft) / totalTime * 100;
-        progressBar.style.width = `${progress}%`;
-
-        if (timeLeft > 0) {
-            timeLeft--;
-        } else {
-            clearInterval(timer);
-            if (textElement.textContent !== "YOUR EGG IS DONE!") {
-                textElement.textContent = "YOUR EGG IS DONE!";
-                progressBar.style.width = "100%";
-                gifElement.src = "images/chicken.gif";
-                const sound = new Audio("sound/done.mp3");
-                sound.volume = 0.4;
-                sound.play();
-            }
-        }
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      countdownElement.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  
+      const progress = ((totalTime - timeLeft) / totalTime) * 100;
+      progressBar.style.width = `${progress}%`;
+  
+      if (timeLeft > 0) {
+        timeLeft--;
+      } else {
+        clearInterval(timer);
+        textElement.textContent = "YOUR EGG IS DONE!";
+        progressBar.style.width = "100%";
+        gifElement.src = "../images/chicken.gif";
+        const sound = new Audio("../sound/done.mp3");
+        sound.volume = 0.4;
+        sound.play();
+      }
     }
-
+  
+    // Start timer
     timer = setInterval(updateTimer, 1000);
     updateTimer();
-
-    // Restart Button: Reset the timer and progress bar
+  
+    // =======================
+    // Restart Button
+    // =======================
     restartButton.addEventListener("click", () => {
-        clearInterval(timer);
-        timeLeft = totalTime;
-        progressBar.style.width = "0%";
-        gifElement.src = "images/egg.gif"; // Reset GIF to the initial boiling egg GIF
-        textElement.textContent = "Your egg will be ready in:"; // Reset text to the initial value
-        updateTimer();
-        timer = setInterval(updateTimer, 1000);
+      clearInterval(timer);
+      timeLeft = totalTime;
+      progressBar.style.width = "0%";
+      gifElement.src = "../images/egg.gif";
+      textElement.textContent = "Your egg will be ready in:";
+      timer = setInterval(updateTimer, 1000);
+      updateTimer();
     });
-
-    // Home Button: Redirect to home or reset UI
+  
+    // =======================
+    // Home Button & Modal Logic
+    // =======================
     homeButton.addEventListener("click", () => {
-        clearInterval(timer);
-        const modal = document.getElementById("home-confirmation-modal");
-        modal.classList.remove("hidden"); // Show the modal
+      clearInterval(timer);
+      modal.classList.remove("hidden");
     });
-
-    document.getElementById("confirm-home-button").addEventListener("click", () => {
-        window.location.href = "index.html"; // Redirect to the homepage
+  
+    confirmButton.addEventListener("click", () => {
+      window.location.href = "../index.html";
     });
-
-    document.getElementById("cancel-home-button").addEventListener("click", () => {
-        const modal = document.getElementById("home-confirmation-modal");
-        modal.classList.add("hidden"); // Hide the modal
-        if (!timer) {
-            timer = setInterval(updateTimer, 1000); // Resume the timer only if it's not already running
-        }
+  
+    cancelButton.addEventListener("click", () => {
+      modal.classList.add("hidden");
+      timer = setInterval(updateTimer, 1000); // Resume if cancelled
     });
-}
-
-// =======================
-// Initialize Timers with Progress Bar and "Chicken" GIF
-// =======================
-startEggTimer("runny-countdown", 6 * 60, "runny-progress", "runny-gif", "runny-text", "runny-restart-button", "runny-home-button");
-startEggTimer("soft-countdown", 8 * 60, "soft-progress", "soft-gif", "soft-text", "soft-restart-button", "soft-home-button");
-startEggTimer("hard-countdown", 10 * 60, "hard-progress", "hard-gif", "hard-text", "hard-restart-button", "hard-home-button");
-startEggTimer("overcooked-countdown", 15 * 60, "overcooked-progress", "overcooked-gif", "overcooked-text", "overcooked-restart-button", "overcooked-home-button");
+  }
+  
+  // =======================
+  // Init Timers (only run if matching elements exist)
+  // =======================
+  const eggConfigs = [
+    {
+      timerId: "runny-countdown",
+      totalTime: 6 * 60,
+      progressBarId: "runny-progress",
+      gifElementId: "runny-gif",
+      textElementId: "runny-text",
+      restartButtonId: "runny-restart-button",
+      homeButtonId: "runny-home-button",
+    },
+    {
+      timerId: "soft-countdown",
+      totalTime: 8 * 60,
+      progressBarId: "soft-progress",
+      gifElementId: "soft-gif",
+      textElementId: "soft-text",
+      restartButtonId: "soft-restart-button",
+      homeButtonId: "soft-home-button",
+    },
+    {
+      timerId: "hard-countdown",
+      totalTime: 10 * 60,
+      progressBarId: "hard-progress",
+      gifElementId: "hard-gif",
+      textElementId: "hard-text",
+      restartButtonId: "hard-restart-button",
+      homeButtonId: "hard-home-button",
+    },
+    {
+      timerId: "overcooked-countdown",
+      totalTime: 15 * 60,
+      progressBarId: "overcooked-progress",
+      gifElementId: "overcooked-gif",
+      textElementId: "overcooked-text",
+      restartButtonId: "overcooked-restart-button",
+      homeButtonId: "overcooked-home-button",
+    },
+  ];
+  
+  // Loop through and start the appropriate timer
+  eggConfigs.forEach(config => startEggTimer(config));  

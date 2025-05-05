@@ -1,78 +1,109 @@
+/* ===========
+  Global Styles
+============= */
 body {
     font-family: sans-serif;
     text-align: center;
-    background: url(images/farm.gif) no-repeat center center fixed;
+    background: url(../images/farm.gif) no-repeat center center fixed;
     background-size: cover;
     padding: 2rem;
-}
-
-h1 {
+    color: #333;
+  }
+  
+  /* ===========
+    Typography
+  ============= */
+  h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
-}
-
-h2 {
+  }
+  
+  h2 {
     margin-bottom: 2rem;
-}
-
-h3 {
+  }
+  
+  h3 {
     font-size: 2rem;
-}
-
-.egg-grid-container {
+  }
+  
+  /* ===========
+    Grid Layout
+  ============= */
+  .egg-grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1.5rem;
     padding: 1rem;
-}
-
-.egg-box {
-    background-color: rgba(255, 255, 255, 0.8); /* white with 80% opacity */
+  }
+  
+  /* ===========
+    Egg Boxes
+  ============= */
+  .egg-box {
+    background-color: rgba(255, 255, 255, 0.8);
     border: 2px solid #79d0f5;
     border-radius: 12px;
     padding: 1rem;
     text-decoration: none;
-    color: #333;
+    color: inherit;
     transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.egg-box:hover {
+  }
+  
+  .egg-box:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.egg-box img {
+  }
+  
+  .egg-box img {
     width: 250px;
     height: auto;
     margin-bottom: 0.5rem;
-}
-
-.egg-animation img {
+  }
+  
+  /* ===========
+    Animation
+  ============= */
+  .egg-animation img {
     width: 350px;
     height: auto;
     margin-top: 1rem;
-}
-
-.progress-container {
+  }
+  
+  /* ===========
+    Countdown Timers
+  ============= */
+  .runny-countdown,
+  .soft-countdown,
+  .hard-countdown,
+  .overcooked-countdown {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+  
+  /* ===========
+    Progress Bar
+  ============= */
+  .progress-container {
     width: 100%;
     height: 20px;
     background-color: #f3f3f3;
     border-radius: 10px;
     margin-top: 1rem;
-}
-
-.progress-bar {
+  }
+  
+  .progress-bar {
     height: 100%;
     background-color: #76c7c0;
-    /* You can change the color */
     width: 0%;
-    /* Starts at 0% and grows as the timer goes */
     border-radius: 10px;
     transition: width 1s ease-in-out;
-}
-
-button {
-    background-color: #76c7c0; /* Soft teal color */
+  }
+  
+  /* ===========
+    Buttons
+  ============= */
+  button {
+    background-color: #76c7c0;
     color: white;
     border: none;
     border-radius: 8px;
@@ -81,57 +112,37 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-button:hover {
-    background-color: #5aa8a0; /* Darker teal on hover */
-    transform: translateY(-3px); /* Slight lift effect */
-}
-
-button:active {
-    transform: translateY(0); /* Reset lift effect on click */
+    margin: 0.5rem;
+  }
+  
+  button:hover {
+    background-color: #5aa8a0;
+    transform: translateY(-3px);
+  }
+  
+  button:active {
+    transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-/*Runny Egg Countdown*/
-.runny-countdown {
-    font-size: 3rem;
-    font-weight: bold;
-}
-
-/*Soft Boiled Egg Countdown*/
-.soft-countdown {
-    font-size: 3rem;
-    font-weight: bold;
-}
-
-/*Hard Boiled Egg Countdown*/
-.hard-countdown {
-    font-size: 3rem;
-    font-weight: bold;
-}
-
-/*Overcooked Boiled Egg Countdown*/
-.overcooked-countdown {
-    font-size: 3rem;
-    font-weight: bold;
-}
-
-.modal {
+  }
+  
+  /* ===========
+    Modal
+  ============= */
+  .modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Slightly darker overlay */
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    animation: fadeIn 0.3s ease; /* Smooth fade-in effect */
-}
-
-.modal-content {
+    animation: fadeIn 0.3s ease;
+  }
+  
+  .modal-content {
     background: #ffffff;
     padding: 30px;
     border-radius: 12px;
@@ -139,29 +150,15 @@ button:active {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     max-width: 400px;
     width: 90%;
-}
-
-.modal-content p {
+  }
+  
+  .modal-content p {
     font-size: 1.2rem;
     margin-bottom: 20px;
-    color: #333;
-}
-
-.hidden {
-    display: none;
-}
-
-/* Add fade-in animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.modal-content button {
+  }
+  
+  /* Modal Buttons */
+  .modal-content button {
     margin: 0 10px;
     padding: 10px 20px;
     font-size: 1rem;
@@ -169,22 +166,41 @@ button:active {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#confirm-home-button {
-    background-color: #76c7c0; /* Teal for confirmation */
+  }
+  
+  #confirm-home-button {
+    background-color: #76c7c0;
     color: white;
-}
-
-#confirm-home-button:hover {
+  }
+  
+  #confirm-home-button:hover {
     background-color: #5aa8a0;
-}
-
-#cancel-home-button {
-    background-color: #f76c6c; /* Red for cancel */
+  }
+  
+  #cancel-home-button {
+    background-color: #f76c6c;
     color: white;
-}
-
-#cancel-home-button:hover {
+  }
+  
+  #cancel-home-button:hover {
     background-color: #d95555;
-}
+  }
+  
+  /* ===========
+    Utility
+  ============= */
+  .hidden {
+    display: none;
+  }
+  
+  /* ===========
+    Animations
+  ============= */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }  

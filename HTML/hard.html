@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hard Boiled Egg Timer</title>
-    <link rel="stylesheet" href="/CSS/styles.css" />
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hard Boiled Egg Timer</title>
+  <link rel="stylesheet" href="../CSS/styles.css" />
+</head>
+
+<body>
+  <main>
     <h1>Hard Boiled Egg Timer</h1>
     <h2 id="hard-text">Your egg will be ready in:</h2>
     <div class="hard-countdown" id="hard-countdown">10:00</div>
@@ -16,14 +19,18 @@
     </div>
 
     <div class="egg-animation">
-      <!-- The initial egg gif before the timer ends -->
-      <img src="/images/egg.gif" alt="Boiling Egg" id="hard-gif" />
+      <img src="../images/egg.gif" alt="Boiling Egg" id="hard-gif" />
     </div>
 
-     <!-- Restart Button for Hard Egg -->
-     <div id="hard-timer">
+    <!-- Timer Controls -->
+    <div id="hard-timer">
       <button id="hard-restart-button">Restart</button>
       <button id="hard-home-button">Home</button>
+    </div>
+
+    <!-- Manual Home Link -->
+    <div>
+      <a href="../index.html" style="display:inline-block; margin-top:1rem;">← Back to Home</a>
     </div>
 
     <!-- Confirmation Modal -->
@@ -34,6 +41,9 @@
         <button id="cancel-home-button">No</button>
       </div>
     </div>
-    <script src="/Javascript/script.js"></script>
-  </body>
+  </main>
+
+  <script src="../Javascript/script.js"></script>
+</body>
+
 </html>
