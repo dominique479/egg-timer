@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft Boiled Egg Timer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Soft Boiled Egg Timer</h1>
+    <h2 id="soft-text">Your egg will be ready in:</h2>
+    <div class="soft-countdown" id="soft-countdown">8:00</div>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="soft-progress"></div>
+    </div>
+
+    <div class="egg-animation">
+        <!-- The initial egg gif before the timer ends -->
+        <img src="images/egg.gif" alt="Boiling Egg" id="soft-gif" />
+    </div>
+
+     <!-- Restart Button for Soft Egg -->
+     <div id="soft-timer">
+        <button id="soft-restart-button">Restart</button>
+        <button id="soft-home-button">Home</button>
+      </div>
+  
+      <!-- Confirmation Modal -->
+      <div id="home-confirmation-modal" class="modal hidden">
+        <div class="modal-content">
+          <p>Are you sure you want to go back to the homepage? Your timer will be reset.</p>
+          <button id="confirm-home-button">Yes</button>
+          <button id="cancel-home-button">No</button>
+        </div>
+      </div>
+    <script src="script.js"></script>
+</body>
+</html>
